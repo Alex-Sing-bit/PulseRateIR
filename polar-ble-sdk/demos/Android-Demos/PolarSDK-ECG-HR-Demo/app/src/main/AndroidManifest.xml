@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- Polar SDK needs Bluetooth scan permission to search for BLE devices.-->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+
+    <!-- Polar SDK needs Bluetooth connect permission to connect for found BLE devices.-->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- Allows Polar SDK to connect to paired bluetooth devices. Legacy Bluetooth permission,
+     which is needed on devices with API 30 (Android Q) or older. -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+
+    <!-- Allows Polar SDK to discover and pair bluetooth devices. Legacy Bluetooth permission,
+     which is needed on devices with API 30 (Android Q) or older. -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+    <!-- Polar SDK needs the fine location permission to get results for Bluetooth scan. Request
+    fine location permission on devices with API 30 (Android Q). -->
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="30" />
+
+    <!-- The coarse location permission is needed, if fine location permission is requested. Request
+     coarse location permission on devices with API 30 (Android Q). -->
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:maxSdkVersion="30" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HRActivity"
+            android:exported="false"
+            android:label="@string/hr_name"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FriendsListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AddFriendActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QRScanActivity"
+            android:exported="false"
+            android:parentActivityName=".AddFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IRActivity"
+            android:exported="false"
+            android:label="@string/title_activity_iractivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <action android:name="com.google.intent.category.CARDBOARD" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode, faces" />
+        <meta-data
+            android:name="com.google.zxing.client.android.SCAN.SCAN_MODE"
+            android:value="QR_CODE_MODE" />
+    </application>
+</manifest>

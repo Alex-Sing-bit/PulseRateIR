@@ -1,0 +1,7 @@
+<!-- list_item_layout.xml -->
+<TextView android:id="@+id/textViewName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="18sp"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
